@@ -12,8 +12,6 @@ var PropertyInfo;
 var comments;
 var features;
 
-"hello\n"
-
 function loadImages(){
     var zip = new JSZip();
     var img = zip.folder("images");
@@ -53,7 +51,7 @@ function loadImages(){
     };
 
     var content = zip.generate({type:"blob"});
-    saveAs(content, "mpg.zip");
+    saveAs(content,  PropertyInfo[0]+"mpg.zip");
 }
 
 function getImage( index ){
@@ -107,7 +105,6 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     initialize();
 
     var html = ' <img id="imageid" src=""><canvas id="imgCanvas" />';
-    console.log(message);
     if( $('#imageid').length == 0 ){
          $('body').append(html);
     }
@@ -128,11 +125,8 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
         can.height = this.height;
         ctx.drawImage(img, 0, 0);
 
-        console.log("event Triggered",index);
-
-
-        var encodedBase = can.toDataURL();
-        var imageData = encodedBase.replace(/^data:image\/(png|jpg);base64,/, '')
+        var encodedBase = can.toDataURL("image/jpeg", 1.0);
+         var imageData = encodedBase.replace("data:image/jpeg;base64,", '')
 
         dataCollection.push(imageData);
         index+=1;

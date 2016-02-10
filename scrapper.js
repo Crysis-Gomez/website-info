@@ -11,7 +11,6 @@ var getMapData = function(frame){
         longitude = data.match("var longitude = (.*);");
         response += '{"Map latitude":"'+ latitude[1] +'"},';
         response += '{"Map longitude":"'+ longitude[1] +'"},';
-        debugger;
     }).done(function(){
         getImageData();
     });
@@ -25,7 +24,7 @@ var getImageData = function(){
     });
 
    if(data != undefined && data != null){
-        for (var i = 0; i < data.length; i++) {
+        for (var i = data.length-1; i < data.length; i++) {
               var url = data[i];
               response += '{"Image URL":"'+url.toString()+'"},';
         };
@@ -88,7 +87,6 @@ var respondMessage = function(){
 }
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-    console.log("here");
     if (msg.text === 'download') {
         response = '{"info" : [';
         var fr = jQuery('.fieldValueLocationOnMap iframe');
