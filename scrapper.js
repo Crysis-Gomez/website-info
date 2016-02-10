@@ -11,7 +11,7 @@ var getMapData = function(frame){
         longitude = data.match("var longitude = (.*);");
         response += '{"Map latitude":"'+ latitude[1] +'"},';
         response += '{"Map longitude":"'+ longitude[1] +'"},';
-        debugger;    
+        debugger;
     }).done(function(){
         getImageData();
     });
@@ -19,11 +19,11 @@ var getMapData = function(frame){
 
 
 var getImageData = function(){
-   
+
    var data = jQuery('.indusskieKoderyMudaki a').map(function() {
         return $(this).attr("href");
     });
-   
+
    if(data != undefined && data != null){
         for (var i = 0; i < data.length; i++) {
               var url = data[i];
@@ -31,7 +31,7 @@ var getImageData = function(){
         };
    }
 
-   getTitle();   
+   getTitle();
 }
 
 var getTitle = function(){
@@ -40,8 +40,8 @@ var getTitle = function(){
   test = title.trim();
   test = test.replace(/\s+/g," ");
   response += '{"Property Info":"'+test+'"},';
-  
-  getComments(); 
+
+  getComments();
 }
 
 var getComments = function(){
@@ -58,7 +58,7 @@ var getComments = function(){
 
 var getFeatures = function(){
   var features = jQuery('.listingFeatures ul li');
-  
+
   jQuery.each(features,function(){
       var feature = jQuery(this).text();
       debugger;
@@ -88,17 +88,17 @@ var respondMessage = function(){
 }
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-
+    console.log("here");
     if (msg.text === 'download') {
         response = '{"info" : [';
         var fr = jQuery('.fieldValueLocationOnMap iframe');
-        
+
         if(fr != undefined && fr != null){
             getMapData(fr[0]);
             debugger;
         }else{
             getImageData();
-        }      
+        }
     }
 });
 

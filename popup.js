@@ -11,7 +11,7 @@ function checkURL(url) {
 }
 
 function parseData(){
-  
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
          if(checkURL(tabs[0].url)){
             chrome.tabs.sendMessage(tabs[0].id, {text: 'download'}, parseData);
          }else{
-            alert("This is not a MPG website");
+            var html = "<p>This is not a MPG website</p>";
+            $('.website-info-wrapper').append(html);
          }
       });
   });

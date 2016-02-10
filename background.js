@@ -6,12 +6,13 @@ var count = 0;
 var total = 0;
 var index = 0;
 var obj;
-var mapCordinates = new Array();
-var images = new Array();
-var PropertyInfo = new Array();
-var comments = new Array();
-var features = new Array();
+var mapCordinates;
+var images;
+var PropertyInfo;
+var comments;
+var features;
 
+"hello\n"
 
 function loadImages(){
     var zip = new JSZip();
@@ -29,7 +30,7 @@ function loadImages(){
 
     for (var i = 0; i < features.length; i++) {
         if(i == 0){
-            descriptionString +="\n"+"Property features";
+            descriptionString +="\n\n"+"Property features";
         }
         var data = features[i];
         descriptionString +="\n"+data+"";
@@ -45,22 +46,27 @@ function loadImages(){
     };
 
     f.file("description.txt",descriptionString);
-    
+
     for (var i = 0; i < dataCollection.length; i++) {
         var data = dataCollection[i];
         img.file("picture"+i+".jpg", data ,{base64: true});
     };
-    
+
     var content = zip.generate({type:"blob"});
     saveAs(content, "mpg.zip");
 }
 
 function getImage( index ){
-    if(index >= images.length){
+
+    if(index >  images.length)return;
+
+    if(index == images.length){
         loadImages();
         return;
-    };
-    img.src = images[index];
+    }else{
+        img.src = images[index];
+    }
+
 }
 
 function fillInformation(){
@@ -83,16 +89,30 @@ function fillInformation(){
    getImage(index);
 }
 
+function initialize(){
+    count = 0;
+    total = 0;
+    index = 0;
+    obj;
+    mapCordinates = new Array();
+    images = new Array();
+    PropertyInfo = new Array();
+    comments = new Array();
+    features = new Array();
+}
 var frame;
 
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 
+    initialize();
+
     var html = ' <img id="imageid" src=""><canvas id="imgCanvas" />';
-    $('body').append(html);
+    console.log(message);
+    if( $('#imageid').length == 0 ){
+         $('body').append(html);
+    }
 
     var test = message;
-    console.log(message);
-
     obj = JSON.parse(message);
 
     total = Object.keys(obj.info).length;
@@ -100,7 +120,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     can = document.getElementById("imgCanvas");
     img = document.getElementById("imageid");
     ctx = can.getContext("2d");
-   
+
     fillInformation();
 
     $(img).load(function(){
@@ -108,11 +128,15 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
         can.height = this.height;
         ctx.drawImage(img, 0, 0);
 
+        console.log("event Triggered",index);
+
+
         var encodedBase = can.toDataURL();
         var imageData = encodedBase.replace(/^data:image\/(png|jpg);base64,/, '')
-        
+
         dataCollection.push(imageData);
         index+=1;
+
         getImage(index);
     });
 });
