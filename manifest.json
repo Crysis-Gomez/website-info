@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+
+  "name": "Website info scrapper",
+  "description": "Scrap information of a Website",
+  "version": "1.0",
+  "options_page": "options/options.html",
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png"},
+
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["jquery.js","scrapper.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["jquery.js","FileSaver.js","jszip.js","background.js"]
+   },
+    
+  "permissions": [
+    "downloads",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

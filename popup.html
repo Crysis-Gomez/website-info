@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <title>WebsiteScrapper</title>
+    <style>
+
+      p{
+          text-transform: uppercase;
+          text-decoration: none;
+          font-weight: 200;
+          letter-spacing: .5px;
+          line-height: 15px;
+          color: white;
+          font-size: 10px;
+      }
+
+      html{
+        height: 500px;
+      }     
+      body {
+        width: 500px;
+        overflow-x: hidden;
+        margin-top: 10px;
+        margin-left: 0px;
+        margin-right: 0px
+      }
+      .header{
+        z-index: 10;
+        background-repeat: repeat;
+        height: 40px;
+        width: 100%;
+      }
+
+      .logo img{
+          width: 130px;
+          display: block;
+          margin: auto;
+      }
+
+      .options{
+        float: right;
+        margin-top: 0px;
+        margin-right: 20px;
+        color: white;
+        cursor: pointer;
+      }
+      .options p{
+        font-size: 15px;     
+      }
+
+       .container{
+          
+       }
+      .container p{
+        margin-top: 10px;
+        float: left;
+        margin: 8px;
+      }
+    
+       .title{
+        margin-top: 10px;
+        margin-bottom: 15px;
+       }
+
+       .wrapper{
+        height: 100%;
+       }
+
+       .website-info{
+         padding: 5px;
+       }
+
+       .website-info-wrapper{
+          margin-top: 20px;
+          padding: 20px;
+       }
+
+       .info-name{
+          display: inline-block;
+          min-width: 150px;
+       }
+
+       .info-value{
+         display: inline-block;
+       }
+
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="popup.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <!-- <div class="overlay"></div> -->
+    <!-- <div class="loading"></div> -->
+    <div class="header">
+      <div class="logo">
+        <img src="http://www.caribmedia.com/wp-content/uploads/2015/04/logo.png" rel="DoubleToasted.com">
+
+      </div>
+      <div class="options" id="options"><p>Options</p></div>
+    </div>
+    <div class="wrapper">
+    <div class="website-info-wrapper">
+    <button id="download-content">Download Information</button>
+    </div>
+      
+    </div>
+    </div>
+  </body>
+</html>
+
