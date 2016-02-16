@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "Website info scrapper",
+  "name": "Website info scraper",
   "description": "Scrap information of a Website",
   "version": "1.0",
   "options_page": "options/options.html",
@@ -16,13 +16,13 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["jquery.js","scrapper.js"]
+      "js": ["jquery.js","FileSaver.js","jszip.js","scraper.js"]
     }
   ],
   "background": {
     "scripts": ["jquery.js","FileSaver.js","jszip.js","background.js"]
    },
-    
+
   "permissions": [
     "downloads",
     "storage",
